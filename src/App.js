@@ -23,7 +23,11 @@ function App() {
     axios
       .post("https://lambda-mud-test.herokuapp.com/api/login/", inputs)
       .then(response => {
-        console.log(response);
+        localStorage.setItem("csbuildweek1", response.data.key);
+        setInputs({
+          username: "",
+          password: ""
+        });
       })
       .catch(err => {
         console.log(err.response);
