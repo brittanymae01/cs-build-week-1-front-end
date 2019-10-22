@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button, Divider, Form, Grid, Segment } from "semantic-ui-react";
 
 function App() {
-  const [input, setInput] = useState({
+  const [inputs, setInputs] = useState({
     username: "",
     password: ""
   });
 
-  const handleChange = () => {
-    
+  const handleInputChange = event => {
+    event.persist();
+    setInputs(inputs => ({
+      ...inputs,
+      [event.target.id]: event.target.value
+    }));
+    console.log(inputs);
   };
 
   const handleLogin = () => {};
@@ -27,6 +32,8 @@ function App() {
                 label="Username"
                 placeholder="Username"
                 id="username"
+                onChange={handleInputChange}
+                value={inputs.username}
               />
               <Form.Input
                 icon="lock"
