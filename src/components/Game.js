@@ -92,6 +92,7 @@ export default function Game(props) {
               </Message>
             )}
             <Button
+              onClick={() => handleMove("w")}
               content="West"
               icon="angle double left"
               size="big"
@@ -105,12 +106,14 @@ export default function Game(props) {
               color="teal"
             />
             <Button
+              onClick={() => handleMove("e")}
               content="East"
               icon="angle double right"
               size="big"
               color="green"
             />
             <Button
+              onClick={() => handleMove("s")}
               content="South"
               icon="angle double down"
               size="big"
