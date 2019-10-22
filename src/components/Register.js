@@ -47,9 +47,14 @@ export default function Login(props) {
 
   return (
     <div>
-      <h1>Please login to continue:</h1>
+      <h1>Please register to continue:</h1>
       <Segment placeholder>
         <Grid columns={2} relaxed="very" stackable>
+          <Grid.Column verticalAlign="middle">
+            <p style={{ textAlign: "center" }}>Already a user?</p>
+            <Button href="/login" content="Login!" icon="sign-in" size="big" />
+          </Grid.Column>
+
           <Grid.Column>
             {loader ? (
               <Segment>
@@ -81,15 +86,6 @@ export default function Login(props) {
                 <Button content="Login" primary />
               </Form>
             )}
-          </Grid.Column>
-
-          <Grid.Column verticalAlign="middle">
-            <Button
-              href="/register"
-              content="Register!"
-              icon="signup"
-              size="big"
-            />
           </Grid.Column>
         </Grid>
 
