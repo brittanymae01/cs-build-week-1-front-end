@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Loader } from "semantic-ui-react";
+import { Button, Loader, Message } from "semantic-ui-react";
 
 export default function Game(props) {
   const [loading, setLoading] = useState(false);
@@ -9,7 +9,8 @@ export default function Game(props) {
     username: "",
     roomName: "",
     roomDescription: "",
-    playersInCurrentRoom: []
+    playersInCurrentRoom: [],
+    error_msg: ""
   });
 
   useEffect(() => {
@@ -21,12 +22,13 @@ export default function Game(props) {
       })
       .then(response => {
         console.log(response);
-        setInitialData({
+        setInitialData(responseData => ({
+          ...responseData,
           username: response.data.name,
           roomName: response.data.title,
           roomDescription: response.data.description,
           playersInCurrentRoom: response.data.players
-        });
+        }));
       })
       .catch(err => {
         console.log(err.response);
@@ -53,7 +55,8 @@ export default function Game(props) {
           ...responseData,
           roomName: response.data.title,
           roomDescription: response.data.description,
-          playersInCurrentRoom: response.data.players
+          playersInCurrentRoom: response.data.players,
+          error_msg: response.data.error_msg
         }));
         setLoading(active => !active);
       })
@@ -80,6 +83,14 @@ export default function Game(props) {
         <div>
           <div style={{ marginBottom: "40px" }}>
             <h1>Make a move!</h1>
+            {initialData.error_msg.length > 0 && (
+              <Message negative>
+                <Message.Header>
+                  We're sorry! {initialData.error_msg}
+                </Message.Header>
+                <p>Please make another move!</p>
+              </Message>
+            )}
             <Button
               content="West"
               icon="angle double left"
