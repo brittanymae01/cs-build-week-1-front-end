@@ -51,7 +51,11 @@ export default function Game(props) {
           Description: <strong>{initialData.roomDescription}</strong>
         </p>
         <p>Players in room:</p>
-        
+        {initialData.playersInCurrentRoom.map((player, index) => (
+          <span key={index} style={{ fontWeight: 600 }}>
+            | {player}
+          </span>
+        ))}
       </div>
     </div>
   );
