@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { Button, Divider, Form, Grid, Segment } from "semantic-ui-react";
 
 function App() {
@@ -16,7 +17,18 @@ function App() {
     console.log(inputs);
   };
 
-  const handleLogin = () => {};
+  const handleLogin = event => {
+    event.preventDefault();
+
+    axios
+      .post("https://lambda-mud-test.herokuapp.com/api/login/", inputs)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
+  };
 
   return (
     <div>
@@ -25,7 +37,7 @@ function App() {
       <Segment placeholder>
         <Grid columns={2} relaxed="very" stackable>
           <Grid.Column>
-            <Form>
+            <Form onSubmit={handleLogin}>
               <Form.Input
                 icon="user"
                 iconPosition="left"
