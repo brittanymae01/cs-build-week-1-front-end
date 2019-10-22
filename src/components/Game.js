@@ -31,6 +31,34 @@ export default function Game(props) {
       });
   }, []);
 
+  const handleMove = move => {
+    axios
+      .post(
+        "https://lambda-mud-test.herokuapp.com/api/adv/move/",
+        {
+          direction: move
+        },
+        {
+          headers: {
+            Authorization: `Token ${localStorage.getItem("csbuildweek1")}`
+          }
+        }
+      )
+      .then(response => {
+        console.log("MOVE RESPONSE", response);
+
+        setInitialData(responseData => ({
+          ...responseData,
+          roomName: response.data.title,
+          roomDescription: response.data.description,
+          playersInCurrentRoom: response.data.players
+        }));
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("csbuildweek1");
     props.history.push("/");
