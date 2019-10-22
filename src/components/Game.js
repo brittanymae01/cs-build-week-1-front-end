@@ -81,6 +81,7 @@ export default function Game(props) {
           color="green"
         />
         <Button
+          onClick={() => handleMove("n")}
           content="North"
           icon="angle double up"
           size="big"
