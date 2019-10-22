@@ -41,6 +41,8 @@ function App() {
                 label="Password"
                 type="password"
                 id="password"
+                onChange={handleInputChange}
+                value={inputs.password}
               />
 
               <Button content="Login" primary />
