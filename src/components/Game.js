@@ -75,7 +75,7 @@ export default function Game(props) {
 
       <h1>Welcome {initialData.username}!</h1>
       {loading ? (
-        <Loader active={loading} size="massive" inline="left" />
+        <Loader active={loading} size="massive" inline />
       ) : (
         <div>
           <div style={{ marginBottom: "40px" }}>
