@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Divider, Form, Grid, Segment } from "semantic-ui-react";
 
 function App() {
+  const [input, setInput] = useState({
+    username: "",
+    password: ""
+  });
+
+  const handleChange = () => {
+    
+  };
+
+  const handleLogin = () => {};
+
   return (
     <div>
       <h1>Hello,</h1>
@@ -15,12 +26,14 @@ function App() {
                 iconPosition="left"
                 label="Username"
                 placeholder="Username"
+                id="username"
               />
               <Form.Input
                 icon="lock"
                 iconPosition="left"
                 label="Password"
                 type="password"
+                id="password"
               />
 
               <Button content="Login" primary />
