@@ -46,6 +46,30 @@ export default function Game(props) {
 
       <div style={{ marginBottom: "40px" }}>
         <h1>GAME</h1>
+        <Button
+          content="West"
+          icon="angle double left"
+          size="big"
+          color="green"
+        />
+        <Button
+          content="North"
+          icon="angle double up"
+          size="big"
+          color="teal"
+        />
+        <Button
+          content="East"
+          icon="angle double right"
+          size="big"
+          color="green"
+        />
+        <Button
+          content="South"
+          icon="angle double down"
+          size="big"
+          color="blue"
+        />
       </div>
 
       <div>
