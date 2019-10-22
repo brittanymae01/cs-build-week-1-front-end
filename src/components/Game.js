@@ -37,14 +37,22 @@ export default function Game(props) {
   };
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <div>
       <div>
         <Button onClick={handleLogout}>Log out</Button>
       </div>
+      <div>
+        <h1>Welcome {initialData.username}!</h1>
 
-      <h1>Welcome {initialData.username}!</h1>
-
-      <div></div>
+        <p>
+          Current room: <strong>{initialData.roomName}</strong>
+        </p>
+        <p>
+          Description: <strong>{initialData.roomDescription}</strong>
+        </p>
+        <p>Players in room:</p>
+        
+      </div>
     </div>
   );
 }
