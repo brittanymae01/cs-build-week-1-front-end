@@ -14,7 +14,8 @@ export default function Login(props) {
   const [loader, setLoader] = useState(false);
   const [inputs, setInputs] = useState({
     username: "",
-    password: ""
+    password1: "",
+    password2: ""
   });
 
   const handleInputChange = event => {
@@ -30,12 +31,13 @@ export default function Login(props) {
     event.preventDefault();
     setLoader(active => !active);
     axios
-      .post("https://lambda-mud-test.herokuapp.com/api/login/", inputs)
+      .post("https://lambda-mud-test.herokuapp.com/api/registration/", inputs)
       .then(response => {
         localStorage.setItem("csbuildweek1", response.data.key);
         setInputs({
           username: "",
-          password: ""
+          password1: "",
+          password2: ""
         });
         setLoader(active => !active);
         props.history.push("/game");
@@ -78,12 +80,21 @@ export default function Login(props) {
                   iconPosition="left"
                   label="Password"
                   type="password"
-                  id="password"
+                  id="password1"
                   onChange={handleInputChange}
-                  value={inputs.password}
+                  value={inputs.password1}
+                />
+                <Form.Input
+                  icon="lock"
+                  iconPosition="left"
+                  label="Re-enter Password"
+                  type="password"
+                  id="password2"
+                  onChange={handleInputChange}
+                  value={inputs.password2}
                 />
 
-                <Button content="Login" primary />
+                <Button content="Register Now" primary />
               </Form>
             )}
           </Grid.Column>
