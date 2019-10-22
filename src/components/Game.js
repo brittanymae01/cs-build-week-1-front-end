@@ -19,12 +19,12 @@ export default function Game(props) {
       })
       .then(response => {
         console.log(response);
-        setInitialData(initialData => ({
+        setInitialData({
           username: response.data.name,
           roomName: response.data.title,
           roomDescription: response.data.description,
           playersInCurrentRoom: response.data.players
-        }));
+        });
       })
       .catch(err => {
         console.log(err.response);
@@ -41,9 +41,14 @@ export default function Game(props) {
       <div>
         <Button onClick={handleLogout}>Log out</Button>
       </div>
-      <div>
-        <h1>Welcome {initialData.username}!</h1>
 
+      <h1>Welcome {initialData.username}!</h1>
+
+      <div style={{ marginBottom: "40px" }}>
+        <h1>GAME</h1>
+      </div>
+
+      <div>
         <p>
           Current room: <strong>{initialData.roomName}</strong>
         </p>
