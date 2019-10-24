@@ -6,12 +6,13 @@ import {
   Form,
   Grid,
   Segment,
-  Dimmer,
+  Message,
   Loader
 } from "semantic-ui-react";
 
 export default function Login(props) {
   const [loader, setLoader] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [inputs, setInputs] = useState({
     username: "",
     password1: "",
@@ -34,6 +35,7 @@ export default function Login(props) {
       .post("https://lambda-mud-test.herokuapp.com/api/registration/", inputs)
       .then(response => {
         localStorage.setItem("csbuildweek1", response.data.key);
+        setErrorMessage("");
         setInputs({
           username: "",
           password1: "",
@@ -43,6 +45,12 @@ export default function Login(props) {
         props.history.push("/game");
       })
       .catch(err => {
+        setLoader(active => !active);
+        setErrorMessage("Unable to login. Please try again.");
+        setInputs({
+          username: "",
+          password: ""
+        });
         console.log(err.response);
       });
   };
@@ -59,11 +67,7 @@ export default function Login(props) {
 
           <Grid.Column>
             {loader ? (
-              <Segment>
-                <Dimmer active={loader}>
-                  <Loader />
-                </Dimmer>
-              </Segment>
+              <Loader active={loader} size="massive" />
             ) : (
               <Form onSubmit={handleLogin}>
                 <Form.Input
@@ -93,6 +97,12 @@ export default function Login(props) {
                   onChange={handleInputChange}
                   value={inputs.password2}
                 />
+
+                {errorMessage.length > 0 && (
+                  <Message negative>
+                    <Message.Header>{errorMessage}</Message.Header>
+                  </Message>
+                )}
 
                 <Button content="Register Now" primary />
               </Form>
