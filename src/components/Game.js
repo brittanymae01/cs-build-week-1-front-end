@@ -15,7 +15,7 @@ export default function Game(props) {
 
   useEffect(() => {
     axios
-      .get("https://lambda-mud-test.herokuapp.com/api/adv/init/", {
+      .get("https://intense-woodland-40601.herokuapp.com/api/adv/init/", {
         headers: {
           Authorization: `Token ${localStorage.getItem("csbuildweek1")}`
         }
@@ -39,7 +39,7 @@ export default function Game(props) {
     setLoading(active => !active);
     axios
       .post(
-        "https://lambda-mud-test.herokuapp.com/api/adv/move/",
+        "https://intense-woodland-40601.herokuapp.com/api/adv/move/",
         {
           direction: move
         },

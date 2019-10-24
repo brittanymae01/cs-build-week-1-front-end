@@ -32,7 +32,7 @@ export default function Login(props) {
     event.preventDefault();
     setLoader(active => !active);
     axios
-      .post("https://lambda-mud-test.herokuapp.com/api/registration/", inputs)
+      .post("https://intense-woodland-40601.herokuapp.com/api/registration/", inputs)
       .then(response => {
         localStorage.setItem("csbuildweek1", response.data.key);
         setErrorMessage("");

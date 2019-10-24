@@ -31,7 +31,7 @@ export default function Login(props) {
     event.preventDefault();
     setLoader(active => !active);
     axios
-      .post("https://lambda-mud-test.herokuapp.com/api/login/", inputs)
+      .post("https://intense-woodland-40601.herokuapp.com/api/login/", inputs)
       .then(response => {
         setErrorMessage("");
         localStorage.setItem("csbuildweek1", response.data.key);
