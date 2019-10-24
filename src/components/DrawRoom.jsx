@@ -6,8 +6,14 @@ draw a box for the center of the room
 draw some little circles on each exit "n","e","s","w"
 */
 
-function DrawRoom(props) {
-	return <h1> Im an individual room, i have exits to the {props.exit_n} {props.exit_e} {props.exit_s} {props.exit_w}</h1>
+const DrawRoom = () =>{
+	console.log("We rendered room number: x")
+	
+	return(
+		<div className="room">
+			im a row of 10.
+		</div>
+	)
 }
  
 export default DrawRoom;
