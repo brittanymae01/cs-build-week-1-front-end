@@ -46,7 +46,7 @@ export default function Login(props) {
       })
       .catch(err => {
         setLoader(active => !active);
-        setErrorMessage("Unable to login. Please try again.");
+        setErrorMessage("Unable to register. Please try again.");
         setInputs({
           username: "",
           password: ""
