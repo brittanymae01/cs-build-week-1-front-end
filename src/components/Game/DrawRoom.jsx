@@ -12,7 +12,7 @@ const DrawRoom = (props) =>{
 	return(
 		<div className="room">
 			im a row of 10???
-			{this.props}
+			{/* {this.props} */}
 		</div>
 	)
 }

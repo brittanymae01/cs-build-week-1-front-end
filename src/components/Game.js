@@ -96,6 +96,7 @@ export default function Game(props) {
                 <p>Please make another move!</p>
               </Message>
             )}
+            
             <Button onClick={() => handleMove("w")} content="West" icon="angle double left" size="big" color="green" />
             <Button onClick={() => handleMove("n")} content="North" icon="angle double up" size="big" color="teal" />
             <Button onClick={() => handleMove("e")} content="East" icon="angle double right" size="big" color="green" />
