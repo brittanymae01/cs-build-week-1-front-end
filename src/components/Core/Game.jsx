@@ -1,7 +1,42 @@
-import React, { Component } from 'react';
-import {Button} from "semantic-ui-react";
+import React, { useState, useEffect } from 'react';
+import {Button, Loader, Message} from "semantic-ui-react";
+import axios from "axios";
 
 export default function Game (props){
+	const [loading, setLoading] = useState(false);
+
+	// Sets initial data & then the actual data once we have it for the following
+	// username, room name, description of the room & gets players currently in the room
+	const [initialData, setInitialData] = useState({
+		username: "",
+		roomName: "",
+		roomDescription: "",
+		playersInCurrentRoom: [],
+		error_msg: ""
+	});
+
+	useEffect(() => {
+		axios
+		  	.get("https://intense-woodland-40601.herokuapp.com/api/adv/init/", {
+				headers: {
+			  	Authorization: `Token ${localStorage.getItem("csbuildweek1")}`
+				}
+		  	})
+		  	.then(response => {
+				console.log(response);
+				setInitialData(responseData => ({
+			  	...responseData,
+			  		username: response.data.name,
+			  		roomName: response.data.title,
+			  		roomDescription: response.data.description,
+			  		playersInCurrentRoom: response.data.players
+			}));
+		  })
+		  	.catch(err => {
+				console.log(err.response);
+		  	});
+	}, []);
+
 	
 	const handleLogout = () =>{
 		localStorage.removeItem("csbuildweek1");
