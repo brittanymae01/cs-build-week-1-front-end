@@ -29,7 +29,8 @@ export default function Game (props){
 			  		username: response.data.name,
 			  		roomName: response.data.title,
 			  		roomDescription: response.data.description,
-			  		playersInCurrentRoom: response.data.players
+					playersInCurrentRoom: response.data.players,
+
 			}));
 		  })
 		  	.catch(err => {
@@ -37,6 +38,38 @@ export default function Game (props){
 		  	});
 	}, []);
 
+	const handleMove = move => {
+		setLoading(active => !active);
+		axios
+		  .post(
+			"https://intense-woodland-40601.herokuapp.com/api/adv/move/",
+			{
+			  direction: move
+			},
+			{
+			  headers: {
+				Authorization: `Token ${localStorage.getItem("csbuildweek1")}`
+			  }
+			}
+			)
+	
+		  .then(response => {
+			console.log("MOVE RESPONSE", response);
+	
+			setInitialData(responseData => ({
+			  ...responseData,
+			  roomName: response.data.title,
+			  roomDescription: response.data.description,
+			  playersInCurrentRoom: response.data.players,
+			  error_msg: response.data.error_msg
+			}));
+	
+			setLoading(active => !active);
+		  })
+		  .catch(err => {
+			console.log(err.response);
+		  });
+	  };
 	
 	const handleLogout = () =>{
 		localStorage.removeItem("csbuildweek1");
@@ -50,11 +83,16 @@ export default function Game (props){
 			</div>
 		
 			<div className="room_data">
-				<h2> We are currently in the _____ Room</h2>
+				<h2> We are currently in the {initialData.roomName}.</h2>
+				<h3>{initialData.roomDescription}</h3>
+
 			</div>
 
 			<div className="room_movement">
-				<p> We can move in these directions </p>
+			<Button onClick={() => handleMove("w")} content="West" icon="angle double left" size="big" color="green" />
+            <Button onClick={() => handleMove("n")} content="North" icon="angle double up" size="big" color="teal" />
+            <Button onClick={() => handleMove("e")} content="East" icon="angle double right" size="big" color="green" />
+            <Button onClick={() => handleMove("s")} content="South" icon="angle double down" size="big" color="blue" />
 			</div>
 
 			<div className="room_visualizer">

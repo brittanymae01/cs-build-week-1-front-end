@@ -37,7 +37,6 @@ export default function Game(props) {
 
   const handleMove = move => {
     setLoading(active => !active);
-
     axios
       .post(
         "https://intense-woodland-40601.herokuapp.com/api/adv/move/",
