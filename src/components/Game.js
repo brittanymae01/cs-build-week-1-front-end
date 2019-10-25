@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Loader, Message } from "semantic-ui-react";
+import DrawRoom from "./DrawRoom";
 
 export default function Game(props) {
   const [loading, setLoading] = useState(false);
@@ -37,6 +38,7 @@ export default function Game(props) {
 
   const handleMove = move => {
     setLoading(active => !active);
+
     axios
       .post(
         "https://intense-woodland-40601.herokuapp.com/api/adv/move/",
@@ -48,9 +50,11 @@ export default function Game(props) {
             Authorization: `Token ${localStorage.getItem("csbuildweek1")}`
           }
         }
-      )
+        )
+
       .then(response => {
         console.log("MOVE RESPONSE", response);
+
         setInitialData(responseData => ({
           ...responseData,
           roomName: response.data.title,
@@ -58,6 +62,7 @@ export default function Game(props) {
           playersInCurrentRoom: response.data.players,
           error_msg: response.data.error_msg
         }));
+
         setLoading(active => !active);
       })
       .catch(err => {
@@ -81,7 +86,7 @@ export default function Game(props) {
         <Loader active={loading} size="massive" inline />
       ) : (
         <div>
-          <div style={{ marginBottom: "40px" }}>
+          <div className="move_status" style={{ marginBottom: "40px" }}>
             <h1>Make a move!</h1>
             {initialData.error_msg.length > 0 && (
               <Message negative>
@@ -91,37 +96,13 @@ export default function Game(props) {
                 <p>Please make another move!</p>
               </Message>
             )}
-            <Button
-              onClick={() => handleMove("w")}
-              content="West"
-              icon="angle double left"
-              size="big"
-              color="green"
-            />
-            <Button
-              onClick={() => handleMove("n")}
-              content="North"
-              icon="angle double up"
-              size="big"
-              color="teal"
-            />
-            <Button
-              onClick={() => handleMove("e")}
-              content="East"
-              icon="angle double right"
-              size="big"
-              color="green"
-            />
-            <Button
-              onClick={() => handleMove("s")}
-              content="South"
-              icon="angle double down"
-              size="big"
-              color="blue"
-            />
+            <Button onClick={() => handleMove("w")} content="West" icon="angle double left" size="big" color="green" />
+            <Button onClick={() => handleMove("n")} content="North" icon="angle double up" size="big" color="teal" />
+            <Button onClick={() => handleMove("e")} content="East" icon="angle double right" size="big" color="green" />
+            <Button onClick={() => handleMove("s")} content="South" icon="angle double down" size="big" color="blue" />
           </div>
-
-          <div>
+          <DrawRoom rooms={props}/>
+          <div className="room_info">
             <p>
               Current room: <strong>{initialData.roomName}</strong>
             </p>
