@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Game from "./components/Game";
+import Game from "./components/Core/Game";
 import AuthenticationRoute from "./authentication/AuthenticationRoute";
 
 function App() {

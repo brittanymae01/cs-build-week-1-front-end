@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Loader, Message } from "semantic-ui-react";
-import DrawRoom from "./DrawRoom";
 
 export default function Game(props) {
   const [loading, setLoading] = useState(false);
@@ -102,7 +101,7 @@ export default function Game(props) {
             <Button onClick={() => handleMove("e")} content="East" icon="angle double right" size="big" color="green" />
             <Button onClick={() => handleMove("s")} content="South" icon="angle double down" size="big" color="blue" />
           </div>
-          <DrawRoom rooms={props}/>
+          {/* <DrawRoom rooms={props}/> */}
           <div className="room_info">
             <p>
               Current room: <strong>{initialData.roomName}</strong>
